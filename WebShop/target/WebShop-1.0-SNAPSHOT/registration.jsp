@@ -60,9 +60,11 @@ pageEncoding="ISO-8859-1"%>
                    aria-describedby="confirmPasswordHelp" placeholder="Confirm password">
         </div>
 
+        <form action="captcha">
         <div>
-            <img src="http://localhost:8080/CaptchaServlet">
+            <img src="registerCaptcha.jpeg">
         </div>
+        </form>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

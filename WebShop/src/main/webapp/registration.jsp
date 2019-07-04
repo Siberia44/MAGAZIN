@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="info" %>
 
 <head>
     <!-- Required meta tags -->
@@ -60,9 +62,11 @@ pageEncoding="ISO-8859-1"%>
                    aria-describedby="confirmPasswordHelp" placeholder="Confirm password">
         </div>
 
+        <form c:action="captcha">
         <div>
-            <img src="http://localhost:8080/CaptchaServlet">
+            <img src="registerCaptcha.jpeg">
         </div>
+        </form>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
@@ -80,7 +84,7 @@ pageEncoding="ISO-8859-1"%>
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
+<form></form>
 <script src="js/commonFunction.js"></script>
 <script src="js/validation.js"></script>
 <!--<script src="js/validationJquery.js"></script>-->

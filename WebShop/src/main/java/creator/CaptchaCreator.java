@@ -19,8 +19,7 @@ public class CaptchaCreator {
 
     public BufferedImage createImage() throws NoSuchAttributeException {
         createCaptchaNumbers();
-        BufferedImage image;
-        image = createCaptchaBackground();
+        BufferedImage image = createCaptchaBackground();
         return getCaptchaWithNumbers(image);
     }
 
