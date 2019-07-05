@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="info" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<head>
+
+<head xmlns:c="http://www.w3.org/1999/XSL/Transform">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
@@ -60,13 +62,19 @@ pageEncoding="ISO-8859-1"%>
                    aria-describedby="confirmPasswordHelp" placeholder="Confirm password">
         </div>
 
-        <form action="captcha">
-        <div>
-            <img src="registerCaptcha.jpeg">
-        </div>
-        </form>
+        <info:captcha captchaId="${captchaId}" image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
+        <input type="text" id="captcha" name="captcha" placeholder="Numbers from picture">
+
+        <!--<c:if test="${isCaptcha == false}">-->
+            <!--<BLOCKQUOTE>-->
+                <!--<h4 style="color: red">-->
+                    <!--<strong>Invalid Captcha!</strong>-->
+                <!--</h4>-->
+            <!--</BLOCKQUOTE>-->
+        <!--</c:if>-->
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
 </div>
 
 <!-- Optional JavaScript -->
@@ -82,7 +90,7 @@ pageEncoding="ISO-8859-1"%>
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-
+<form></form>
 <script src="js/commonFunction.js"></script>
 <script src="js/validation.js"></script>
 <!--<script src="js/validationJquery.js"></script>-->

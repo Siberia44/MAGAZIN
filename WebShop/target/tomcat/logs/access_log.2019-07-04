@@ -1,3 +1,0 @@
-0:0:0:0:0:0:0:1 - - [04/Jul/2019:23:46:49 +0300] "GET / HTTP/1.1" 304 - http-bio-8080-exec-1 463
-0:0:0:0:0:0:0:1 - - [04/Jul/2019:23:46:54 +0300] "GET /registration.jsp HTTP/1.1" 200 3807 http-bio-8080-exec-2 1727
-0:0:0:0:0:0:0:1 - - [04/Jul/2019:23:46:54 +0300] "GET /registerCaptcha.jpeg HTTP/1.1" 404 991 http-bio-8080-exec-3 10

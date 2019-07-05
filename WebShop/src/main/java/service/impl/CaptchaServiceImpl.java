@@ -24,14 +24,28 @@ public class CaptchaServiceImpl implements ICaptchaService {
         this.captchaDao = captchaDao;
     }
 
+//    @Override
+//    public Captcha create() throws NoSuchAttributeException {
+//        CaptchaCreator creator = new CaptchaCreator().setHeight(40)
+//                .setWidth(220)
+//                .setSymbolCount(9);
+//        BufferedImage image = creator.createImage();
+//        createImageFile(image);
+//        return createCaptcha(creator.getCaptchaNumbers());
+//    }
+
+
     @Override
-    public Captcha create() throws NoSuchAttributeException {
-        CaptchaCreator creator = new CaptchaCreator().setHeight(40)
+    public CaptchaCreator create() {
+        return new CaptchaCreator().setHeight(40)
                 .setWidth(220)
                 .setSymbolCount(9);
-        BufferedImage image = creator.createImage();
-        createImageFile(image);
-        return createCaptcha(creator.getCaptchaNumbers());
+    }
+
+
+    @Override
+    public BufferedImage bufferedImage(CaptchaCreator captchaCreator) throws NoSuchAttributeException {
+        return captchaCreator.createImage();
     }
 
     @Override
@@ -67,7 +81,8 @@ public class CaptchaServiceImpl implements ICaptchaService {
         }
     }
 
-    private Captcha createCaptcha(String captchaNumbers) {
+    @Override
+    public Captcha createCaptcha(String captchaNumbers) {
         return new Captcha.CaptchaBuilder().setExpirationTime(new Date().getTime())
                 .setNumbers(captchaNumbers).build();
     }

@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WebShop.iml" filepath="$PROJECT_DIR$/WebShop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/localhost.iml" filepath="$PROJECT_DIR$/target/tomcat/work/Tomcat/localhost/localhost.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
     </modules>
   </component>
 </project>
