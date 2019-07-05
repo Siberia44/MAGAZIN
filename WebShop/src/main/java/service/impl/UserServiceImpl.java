@@ -17,7 +17,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean isUserPresent(String name) {
         List<User> userList = userDao.getListOfAllUsers();
-        System.out.println(String.valueOf(userList.toArray()));
+        System.out.println(userList.toArray());
         Optional<User> optionalUser = userList.stream().filter(nameInList -> nameInList.getName().equals(name)).findFirst();
         System.out.println(optionalUser.isPresent());
         return optionalUser.isPresent();

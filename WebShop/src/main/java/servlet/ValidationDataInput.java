@@ -23,7 +23,7 @@ public class ValidationDataInput extends HttpServlet {
     private CaptchaHandler captchaHandler;
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config)  {
         ServletContext servletContext = config.getServletContext();
         userService = (IUserService) servletContext.getAttribute(Constant.USER_SERVICE);
         captchaService = (ICaptchaService) servletContext.getAttribute(ContextConstant.CAPTCHA_SERVICE);

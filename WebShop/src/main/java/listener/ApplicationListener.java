@@ -21,26 +21,40 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class ApplicationListener implements ServletContextListener {
+    private UserContainer container = new UserContainer();
+    private IUserDao userDao;
+    private ICaptchaDao captchaDao;
+    private ICaptchaService captchaService;
+    private IUserService userService;
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        UserContainer container = new UserContainer();
-        IUserDao userDao = new UserDaoImpl(container.getUsersList());
-        ICaptchaDao captchaDao = new CaptchaDaoImpl();
-        ICaptchaService captchaService = new CaptchaServiceImpl(captchaDao);
-        IUserService userService = new UserServiceImpl(userDao);
-
+        createDao();
+        createServices();
+        setCaptchaHandler(sce);
         sce.getServletContext().setAttribute(Constant.USER_SERVICE, userService);
         sce.getServletContext().setAttribute(ContextConstant.CAPTCHA_SERVICE, captchaService);
-
-        ServletContext context = sce.getServletContext();
-
-        String handlerName = context.getInitParameter(ContextConstant.CAPTCHA_HANDLER);
-        CaptchaHandler handler = new CaptchaHandlerContainer().getCaptchaHandler(handlerName);
-        context.setAttribute(ContextConstant.CAPTCHA_PRESERVER, handler);
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
 
+    }
+
+    private void createDao(){
+        userDao = new UserDaoImpl(container.getUsersList());
+        captchaDao = new CaptchaDaoImpl();
+    }
+
+    private void createServices(){
+        captchaService = new CaptchaServiceImpl(captchaDao);
+        userService = new UserServiceImpl(userDao);
+    }
+
+    private void setCaptchaHandler(ServletContextEvent sce){
+        ServletContext context = sce.getServletContext();
+        String handlerName = context.getInitParameter(ContextConstant.CAPTCHA_HANDLER);
+        CaptchaHandler handler = new CaptchaHandlerContainer().getCaptchaHandler(handlerName);
+        context.setAttribute(ContextConstant.CAPTCHA_PRESERVER, handler);
     }
 }
