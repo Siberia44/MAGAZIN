@@ -1,3 +1,5 @@
-0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:07:47 +0300] "GET / HTTP/1.1" 304 - http-bio-8080-exec-1 28
-0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:07:49 +0300] "GET /registration.jsp HTTP/1.1" 200 4018 http-bio-8080-exec-3 530
-0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:07:49 +0300] "GET /captcha HTTP/1.1" 200 6491 http-bio-8080-exec-4 82
+0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:48:26 +0300] "GET /registration.jsp HTTP/1.1" 200 4018 http-bio-8080-exec-1 530
+0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:48:26 +0300] "GET /captcha HTTP/1.1" 200 3269 http-bio-8080-exec-3 68
+0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:48:36 +0300] "GET /check-login?userName=%D0%B0%D0%BF%D1%80%D0%B0%D0%BF%D1%80&userEmail=LOL%40DSA.COM&userPassword=11111111&userConfirmPassword=11111111&captcha=321321 HTTP/1.1" 200 4045 http-bio-8080-exec-4 15
+0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:48:36 +0300] "GET /captcha HTTP/1.1" 200 3340 http-bio-8080-exec-6 6
+0:0:0:0:0:0:0:1 - - [05/Jul/2019:14:48:53 +0300] "GET /check-login?userName=KKK&userEmail=LOL%40DSA.COM&userPassword=11111111&userConfirmPassword=11111111&captcha=325455605 HTTP/1.1" 200 6366 http-bio-8080-exec-7 3

@@ -38,30 +38,30 @@ public class CaptchaController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         captchaService.removeOldCaptcha();
         getSenderWithNewCaptcha(req, resp).send();
-        returnToRegistrationByInvalidCaptcha(req, resp);
+        req.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(req, resp);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (captchaService.checkCaptchaOnValid(req, captchaHandler)){
-            req.getRequestDispatcher("index.html").forward(req, resp);
-        } else {
-            returnToRegistrationByInvalidCaptcha(req, resp);
-        }
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        if (captchaService.checkCaptchaOnValid(req, captchaHandler)){
+//            req.getRequestDispatcher("index.html").forward(req, resp);
+//        } else {
+//            req.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(req, resp);
+//        }
+//    }
 
-    private void returnToRegistrationByInvalidCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        getSenderWithNewCaptcha(request, response)
-                .setCaptcha(Boolean.TRUE)
-                .send();
-        try {
-            request.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void returnToRegistrationByInvalidCaptcha(HttpServletRequest request, HttpServletResponse response) {
+//        getSenderWithNewCaptcha(request, response)
+//                .setCaptcha(Boolean.TRUE)
+//                .send();
+//        try {
+//            request.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(request, response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
         CaptchaSender sender = new CaptchaSender(request, response);

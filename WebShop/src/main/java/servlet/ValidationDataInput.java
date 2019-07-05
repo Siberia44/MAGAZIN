@@ -33,16 +33,11 @@ public class ValidationDataInput extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("userName");
-        if (userService.isUserPresent(name)) {
+        if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(req, captchaHandler)) {
             saveAllInformation(req);
             req.getRequestDispatcher("registration.jsp").forward(req, resp);
         } else {
-            if (captchaService.checkCaptchaOnValid(req, captchaHandler)){
-                req.getRequestDispatcher("index.html").forward(req, resp);
-            } else {
-                req.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(req, resp);
-            }
-          //  req.getRequestDispatcher("index.html").forward(req, resp);
+            req.getRequestDispatcher("index.html").forward(req, resp);
         }
     }
 

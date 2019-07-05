@@ -16,8 +16,9 @@ public class SessionCaptchaHandler extends AbstractCaptchaHandler {
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        captches.put(captcha.getId(), captcha);
-        request.getSession().setAttribute(CAPTCHA_ID, captcha.getId());
+        int captchaID = captcha.getId();
+        captches.put(captchaID, captcha);
+        request.getSession().setAttribute(CAPTCHA_ID, captchaID);
     }
 
     @Override
