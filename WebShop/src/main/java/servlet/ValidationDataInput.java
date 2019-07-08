@@ -2,8 +2,6 @@ package servlet;
 
 import captcha.CaptchaHandler;
 import constant.Constant;
-import constant.ContextConstant;
-import constant.ControllerConstant;
 import service.ICaptchaService;
 import service.IUserService;
 
@@ -24,20 +22,20 @@ public class ValidationDataInput extends HttpServlet {
 
     @Override
     public void init(ServletConfig config)  {
-        ServletContext servletContext = config.getServletContext();
-        userService = (IUserService) servletContext.getAttribute(Constant.USER_SERVICE);
-        captchaService = (ICaptchaService) servletContext.getAttribute(ContextConstant.CAPTCHA_SERVICE);
-        captchaHandler = (CaptchaHandler) config.getServletContext().getAttribute(ContextConstant.CAPTCHA_PRESERVER);
+        ServletContext context = config.getServletContext();
+        userService = (IUserService) context.getAttribute(Constant.USER_SERVICE);
+        captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
+        captchaHandler = (CaptchaHandler) context.getAttribute(Constant.CAPTCHA_PRESERVER);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("userName");
         if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(req, captchaHandler)) {
             saveAllInformation(req);
             req.getRequestDispatcher("registration.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("index.html").forward(req, resp);
+            resp.sendRedirect("index.html");
         }
     }
 

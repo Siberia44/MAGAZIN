@@ -1,7 +1,7 @@
 package service.impl;
 
 import captcha.CaptchaHandler;
-import constant.ControllerConstant;
+import constant.Constant;
 import container.CaptchaParameterContainer;
 import creator.CaptchaCreator;
 import dao.ICaptchaDao;
@@ -24,24 +24,12 @@ public class CaptchaServiceImpl implements ICaptchaService {
         this.captchaDao = captchaDao;
     }
 
-//    @Override
-//    public Captcha create() throws NoSuchAttributeException {
-//        CaptchaCreator creator = new CaptchaCreator().setHeight(40)
-//                .setWidth(220)
-//                .setSymbolCount(9);
-//        BufferedImage image = creator.createImage();
-//        createImageFile(image);
-//        return createCaptcha(creator.getCaptchaNumbers());
-//    }
-
-
     @Override
     public CaptchaCreator create() {
         return new CaptchaCreator().setHeight(40)
                 .setWidth(220)
                 .setSymbolCount(9);
     }
-
 
     @Override
     public BufferedImage bufferedImage(CaptchaCreator captchaCreator) throws NoSuchAttributeException {
@@ -65,7 +53,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
     public boolean checkCaptchaOnValid(HttpServletRequest request, CaptchaHandler handler) {
         try {
             Captcha captcha = handler.getCaptcha(request);
-            return captcha.getNumbers().equals(request.getParameter(ControllerConstant.CAPTCHA));
+            return captcha.getNumbers().equals(request.getParameter(Constant.CAPTCHA));
         } catch (SessionTimeOutException e) {
             e.printStackTrace();
             return false;

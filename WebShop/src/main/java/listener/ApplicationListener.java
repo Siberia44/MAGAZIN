@@ -2,7 +2,6 @@ package listener;
 
 import captcha.CaptchaHandler;
 import constant.Constant;
-import constant.ContextConstant;
 import container.CaptchaHandlerContainer;
 import container.UserContainer;
 import dao.ICaptchaDao;
@@ -33,7 +32,7 @@ public class ApplicationListener implements ServletContextListener {
         createServices();
         setCaptchaHandler(sce);
         sce.getServletContext().setAttribute(Constant.USER_SERVICE, userService);
-        sce.getServletContext().setAttribute(ContextConstant.CAPTCHA_SERVICE, captchaService);
+        sce.getServletContext().setAttribute(Constant.CAPTCHA_SERVICE, captchaService);
     }
 
     @Override
@@ -53,8 +52,8 @@ public class ApplicationListener implements ServletContextListener {
 
     private void setCaptchaHandler(ServletContextEvent sce){
         ServletContext context = sce.getServletContext();
-        String handlerName = context.getInitParameter(ContextConstant.CAPTCHA_HANDLER);
+        String handlerName = context.getInitParameter(Constant.CAPTCHA_HANDLER);
         CaptchaHandler handler = new CaptchaHandlerContainer().getCaptchaHandler(handlerName);
-        context.setAttribute(ContextConstant.CAPTCHA_PRESERVER, handler);
+        context.setAttribute(Constant.CAPTCHA_PRESERVER, handler);
     }
 }

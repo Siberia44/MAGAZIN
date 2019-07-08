@@ -24,9 +24,7 @@ captcha\impl\CookieCaptchaHandler.class
 entity\User.class
 entity\Captcha.class
 exception\SessionTimeOutException.class
-constant\ContextConstant.class
 dao\IUserDao.class
-constant\ControllerConstant.class
 container\CaptchaHandlerContainer.class
 dao\impl\CaptchaDaoImpl.class
 captcha\AbstractCaptchaHandler.class

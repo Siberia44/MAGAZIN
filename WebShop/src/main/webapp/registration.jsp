@@ -38,7 +38,7 @@
     </div>
 </nav>
 <div class="container">
-    <form id="registration-form" action="check-login">
+    <form id="registration-form" action="check-login" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Enter name</label>
             <input type="name" class="form-control" name="userName" id="input-Name" aria-describedby="nameHelp"
@@ -65,13 +65,6 @@
         <info:captcha captchaId="${captchaId}" image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
         <input type="text" id="captcha" name="captcha" placeholder="Numbers from picture">
 
-        <!--<c:if test="${isCaptcha == false}">-->
-            <!--<BLOCKQUOTE>-->
-                <!--<h4 style="color: red">-->
-                    <!--<strong>Invalid Captcha!</strong>-->
-                <!--</h4>-->
-            <!--</BLOCKQUOTE>-->
-        <!--</c:if>-->
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 

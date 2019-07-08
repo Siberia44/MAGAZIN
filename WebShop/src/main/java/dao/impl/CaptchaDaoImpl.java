@@ -14,16 +14,6 @@ public class CaptchaDaoImpl implements ICaptchaDao {
     }
 
     @Override
-    public Captcha addCaptcha(Captcha captcha) {
-        return this.captcha.put(captcha.getId(), captcha);
-    }
-
-    @Override
-    public boolean containsCaptcha(int key) {
-        return captcha.containsKey(key);
-    }
-
-    @Override
     public Captcha getCaptcha(int key) {
         return captcha.get(key);
     }

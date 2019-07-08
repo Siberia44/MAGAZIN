@@ -1,7 +1,6 @@
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\listener\ApplicationListener.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\captcha\impl\HiddenFieldCaptchaHandler.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\service\ICaptchaService.java
-C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\constant\ContextConstant.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\service\IUserService.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\entity\Captcha.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\sender\CaptchaSender.java
@@ -16,7 +15,6 @@ C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\captcha\im
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\dao\impl\UserDaoImpl.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\dao\IUserDao.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\captcha\impl\SessionCaptchaHandler.java
-C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\constant\ControllerConstant.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\dao\ICaptchaDao.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\service\impl\CaptchaServiceImpl.java
 C:\Users\Dmytro_Taranov\Desktop\MAGAZIN\MAGAZIN\WebShop\src\main\java\captcha\AbstractCaptchaHandler.java

@@ -4,7 +4,7 @@ import captcha.CaptchaHandler;
 import captcha.impl.CookieCaptchaHandler;
 import captcha.impl.HiddenFieldCaptchaHandler;
 import captcha.impl.SessionCaptchaHandler;
-import constant.ContextConstant;
+import constant.Constant;
 import entity.Captcha;
 
 import java.util.HashMap;
@@ -21,9 +21,9 @@ public class CaptchaHandlerContainer {
     }
 
     private void handlersInit() {
-        handlers.put(ContextConstant.HIDDEN_FIELD_CAPTCHA_HANDLER, new HiddenFieldCaptchaHandler(captches));
-        handlers.put(ContextConstant.COOKIE_CAPTCHA_HANDLER, new CookieCaptchaHandler(captches));
-        handlers.put(ContextConstant.SESSION_CAPTCHA_HANDLER, new SessionCaptchaHandler(captches));
+        handlers.put(Constant.HIDDEN_FIELD_CAPTCHA_HANDLER, new HiddenFieldCaptchaHandler(captches));
+        handlers.put(Constant.COOKIE_CAPTCHA_HANDLER, new CookieCaptchaHandler(captches));
+        handlers.put(Constant.SESSION_CAPTCHA_HANDLER, new SessionCaptchaHandler(captches));
     }
 
     public CaptchaHandler getCaptchaHandler(String handlerName){

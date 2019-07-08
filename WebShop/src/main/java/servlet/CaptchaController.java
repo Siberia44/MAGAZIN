@@ -1,11 +1,9 @@
 package servlet;
 
 import captcha.CaptchaHandler;
-import constant.ContextConstant;
-import constant.ControllerConstant;
+import constant.Constant;
 import creator.CaptchaCreator;
 import entity.Captcha;
-import entity.User;
 import sender.CaptchaSender;
 import service.ICaptchaService;
 
@@ -30,15 +28,15 @@ public class CaptchaController extends HttpServlet {
     @Override
     public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
-        captchaService = (ICaptchaService) context.getAttribute(ContextConstant.CAPTCHA_SERVICE);
-        captchaHandler = (CaptchaHandler) config.getServletContext().getAttribute(ContextConstant.CAPTCHA_PRESERVER);
+        captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
+        captchaHandler = (CaptchaHandler) context.getAttribute(Constant.CAPTCHA_PRESERVER);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         captchaService.removeOldCaptcha();
         getSenderWithNewCaptcha(req, resp).send();
-        req.getRequestDispatcher(ControllerConstant.REGISTRATION_JSP).forward(req, resp);
+        req.getRequestDispatcher(Constant.REGISTRATION_JSP).forward(req, resp);
     }
 
     private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
