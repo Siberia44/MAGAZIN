@@ -57,7 +57,7 @@ public class DefaultCaptchaServiceTest {
     }
 
     @Test
-    public void checkCaptchaOnValidAndReurnFalseWhenCaptchaIsNotValid() throws SessionTimeOutException {
+    public void checkCaptchaOnValidAndReturnFalseWhenCaptchaIsNotValid() throws SessionTimeOutException {
         Mockito.when(captchaHandler.getCaptcha(request)).thenThrow(SessionTimeOutException.class);
         assertFalse(captchaService.checkCaptchaOnValid(request, captchaHandler));
     }

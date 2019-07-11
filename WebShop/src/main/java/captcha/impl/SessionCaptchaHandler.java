@@ -25,7 +25,7 @@ public class SessionCaptchaHandler extends AbstractCaptchaHandler {
     public Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException {
         int captchaId = (int) request.getSession().getAttribute(CAPTCHA_ID);
         Captcha captcha = captches.get(captchaId);
-        if (captcha.isValid()){
+        if (captcha.isValid()) {
             return captcha;
         }
         throw new SessionTimeOutException();

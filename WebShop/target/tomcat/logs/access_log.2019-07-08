@@ -1,4 +1,0 @@
-0:0:0:0:0:0:0:1 - - [08/Jul/2019:16:16:57 +0300] "GET /registration.jsp HTTP/1.1" 200 4015 http-bio-8080-exec-1 457
-0:0:0:0:0:0:0:1 - - [08/Jul/2019:16:16:57 +0300] "GET /captcha HTTP/1.1" 200 3428 http-bio-8080-exec-3 73
-0:0:0:0:0:0:0:1 - - [08/Jul/2019:16:17:17 +0300] "POST /check-login HTTP/1.1" 200 4040 http-bio-8080-exec-4 21
-0:0:0:0:0:0:0:1 - - [08/Jul/2019:16:17:17 +0300] "GET /captcha HTTP/1.1" 200 3237 http-bio-8080-exec-6 8

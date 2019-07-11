@@ -1,24 +1,26 @@
 package entity;
 
+import util.IdGenerator;
+
 public class User {
     private String name;
-    private String surname;
     private String password;
     private String email;
+    private int id;
 
     private User(UserBuilder builder) {
+        this.id = IdGenerator.getUserId();
         this.name = builder.name;
-        this.surname = builder.surname;
         this.password = builder.password;
         this.email = builder.email;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
@@ -31,7 +33,6 @@ public class User {
 
     public static class UserBuilder {
         private String name;
-        private String surname;
         private String password;
         private String email;
 
@@ -40,10 +41,6 @@ public class User {
             return this;
         }
 
-        public UserBuilder setSurname(String surname) {
-            this.surname = surname;
-            return this;
-        }
 
         public UserBuilder setPassword(String password) {
             this.password = password;
@@ -58,6 +55,5 @@ public class User {
         public User build() {
             return new User(this);
         }
-
     }
 }

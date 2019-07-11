@@ -11,5 +11,4 @@ public interface CaptchaHandler {
     void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha);
 
     Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException;
-
 }

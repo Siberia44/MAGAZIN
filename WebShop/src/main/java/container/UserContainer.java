@@ -30,21 +30,18 @@ public class UserContainer {
     private void fillingUsers() {
         user1 = new User.UserBuilder()
                 .setName("user1")
-                .setSurname("1")
                 .setPassword("password1")
                 .setEmail("email1@email.com")
                 .build();
 
         user2 = new User.UserBuilder()
                 .setName("user2")
-                .setSurname("2")
                 .setPassword("password2")
                 .setEmail("email2@email.com")
                 .build();
 
         user3 = new User.UserBuilder()
                 .setName("user3")
-                .setSurname("3")
                 .setPassword("password3")
                 .setEmail("email3@email.com")
                 .build();

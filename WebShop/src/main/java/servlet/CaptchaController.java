@@ -33,25 +33,23 @@ public class CaptchaController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         captchaService.removeOldCaptcha();
         getSenderWithNewCaptcha(req, resp).send();
-        req.getRequestDispatcher(Constant.REGISTRATION_JSP).forward(req, resp);
     }
 
     private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        CaptchaSender sender = new CaptchaSender(request, response);
+        CaptchaSender sender = new CaptchaSender(request);
         try {
             CaptchaCreator captchaCreator = captchaService.create();
             BufferedImage bufferedImage = captchaService.bufferedImage(captchaCreator);
             OutputStream osImage = response.getOutputStream();
             ImageIO.write(bufferedImage, "jpeg", osImage);
+            request.setAttribute("captcha", bufferedImage);
             Captcha captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers());
             captchaHandler.addCaptcha(request, response, captcha);
             sender.setCaptchaId(captcha.getId());
-        } catch (NoSuchAttributeException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (NoSuchAttributeException | IOException e) {
             e.printStackTrace();
         }
         return sender;

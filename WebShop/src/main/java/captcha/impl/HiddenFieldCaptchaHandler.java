@@ -24,7 +24,7 @@ public class HiddenFieldCaptchaHandler extends AbstractCaptchaHandler {
     public Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException {
         String captchaId = request.getParameter(HIDDEN_CAPTCHA);
         Captcha captcha = captches.get(Integer.parseInt(captchaId));
-        if (captcha.isValid()){
+        if (captcha.isValid()) {
             return captcha;
         }
         throw new SessionTimeOutException();

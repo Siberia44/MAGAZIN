@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class CaptchaServiceImpl implements ICaptchaService {
     ICaptchaDao captchaDao;
@@ -39,12 +42,12 @@ public class CaptchaServiceImpl implements ICaptchaService {
     @Override
     public void removeOldCaptcha() {
         List<Integer> removeId = new ArrayList<>();
-        for (Map.Entry<Integer, Captcha> entry : captchaDao.getAllCaptches().entrySet()){
-            if (!entry.getValue().isValid()){
+        for (Map.Entry<Integer, Captcha> entry : captchaDao.getAllCaptches().entrySet()) {
+            if (!entry.getValue().isValid()) {
                 removeId.add(entry.getKey());
             }
         }
-        for (Integer id : removeId){
+        for (Integer id : removeId) {
             captchaDao.removeCaptcha(id);
         }
     }
@@ -60,7 +63,7 @@ public class CaptchaServiceImpl implements ICaptchaService {
         }
     }
 
-    private void createImageFile(BufferedImage image){
+    private void createImageFile(BufferedImage image) {
         try {
             File file = new File(CaptchaParameterContainer.CAPTCHA_FILE_PATH);
             ImageIO.write(image, "jpeg", file);

@@ -10,7 +10,7 @@ public class Captcha {
     private final String numbers;
     private final long expirationTime;
 
-    private Captcha(CaptchaBuilder builder){
+    private Captcha(CaptchaBuilder builder) {
         id = IdGenerator.getIdCaptcha();
         numbers = builder.numbers;
         expirationTime = builder.expirationTime;
@@ -24,9 +24,28 @@ public class Captcha {
         return numbers;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         return System.currentTimeMillis() - expirationTime <=
                 CaptchaParameterContainer.CAPTCHA_LIVE_TIME;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Captcha captcha = (Captcha) o;
+        return id == captcha.id &&
+                expirationTime == captcha.expirationTime &&
+                Objects.equals(numbers, captcha.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, numbers, expirationTime);
     }
 
     public static class CaptchaBuilder {
@@ -39,33 +58,13 @@ public class Captcha {
             return this;
         }
 
-        public CaptchaBuilder setExpirationTime(long expirationTime){
+        public CaptchaBuilder setExpirationTime(long expirationTime) {
             this.expirationTime = expirationTime;
             return this;
         }
 
-        public Captcha build(){
+        public Captcha build() {
             return new Captcha(this);
         }
-
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()){
-            return false;
-        }
-        Captcha captcha = (Captcha) o;
-        return id == captcha.id &&
-                expirationTime == captcha.expirationTime &&
-                Objects.equals(numbers, captcha.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, numbers, expirationTime);
     }
 }

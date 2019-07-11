@@ -1,21 +1,16 @@
 package sender;
 
-import entity.User;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class CaptchaSender {
     private HttpServletRequest request;
-    private HttpServletResponse response;
     private Integer captchaId = 0;
     private boolean isCaptcha = false;
 
-    public CaptchaSender(HttpServletRequest request, HttpServletResponse response) {
+    public CaptchaSender(HttpServletRequest request) {
         this.request = request;
-        this.response = response;
     }
-
 
     public HttpServletRequest getRequest() {
         return request;
@@ -24,19 +19,6 @@ public class CaptchaSender {
     public CaptchaSender setRequest(HttpServletRequest request) {
         this.request = request;
         return this;
-    }
-
-    public HttpServletResponse getResponse() {
-        return response;
-    }
-
-    public CaptchaSender setResponse(HttpServletResponse response) {
-        this.response = response;
-        return this;
-    }
-
-    public Integer getCaptchaId() {
-        return captchaId;
     }
 
     public CaptchaSender setCaptchaId(Integer captchaId) {
@@ -53,7 +35,7 @@ public class CaptchaSender {
         return this;
     }
 
-    public void send(){
+    public void send() {
         request.getSession().setAttribute("sessionCaptchaId", captchaId);
         request.setAttribute("requestCaptchaId", captchaId);
         request.setAttribute("isCaptcha", isCaptcha);

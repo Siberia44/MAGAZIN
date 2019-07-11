@@ -25,22 +25,20 @@ public class CookieCaptchaHandlerTest {
             "captcha2", "captcha6", "captcha12", "captcha0",
             "asfs43", "captcha5"
     };
+
     private static final String[] CAPTCHA_VALUES = new String[]{
             "5", "4", "10", "23", "11", "45"
     };
-    private Cookie[] cookies;
 
     @Mock
     Captcha captcha;
-
     @Mock
     Map<Integer, Captcha> captchaMap;
-
     @Mock
     HttpServletRequest request;
-
     @InjectMocks
     CookieCaptchaHandler captchaHandler;
+    private Cookie[] cookies;
 
     @Before
     public void setUp() {

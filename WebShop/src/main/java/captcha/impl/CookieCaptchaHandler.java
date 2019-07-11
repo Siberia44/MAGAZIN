@@ -23,7 +23,7 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
         captches.put(captcha.getId(), captcha);
         response.addCookie(new Cookie(CaptchaParameterContainer.CAPTCHA +
-                captcha.getId(),"" + captcha.getId()));
+                captcha.getId(), "" + captcha.getId()));
     }
 
     @Override
@@ -67,5 +67,4 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
             oldestCookieId = idCaptcha;
         }
     }
-
 }

@@ -8,14 +8,13 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class CaptchaCreator {
+    private static final Font font = new Font(CaptchaParameterContainer.FONT_NAME, Font.BOLD,
+            CaptchaParameterContainer.FONT_SIZE);
+    private static final Random random = new Random();
     private String captchaNumbers;
     private int width;
     private int height;
     private int symbolCount;
-
-    private static final Font font = new Font(CaptchaParameterContainer.FONT_NAME, Font.BOLD,
-            CaptchaParameterContainer.FONT_SIZE);
-    private static final Random random = new Random();
 
     public BufferedImage createImage() throws NoSuchAttributeException {
         createCaptchaNumbers();
@@ -42,7 +41,7 @@ public class CaptchaCreator {
     }
 
     private void checkForAllAttributes() throws NoSuchAttributeException {
-        if (width == 0 || height == 0){
+        if (width == 0 || height == 0) {
             throw new NoSuchAttributeException();
         }
     }
@@ -54,14 +53,14 @@ public class CaptchaCreator {
         return image;
     }
 
-    private void addNumberInImage(Graphics2D graphics){
+    private void addNumberInImage(Graphics2D graphics) {
         for (int i = 0; i < symbolCount; i++) {
-            if (i % 2 == 0){
-                graphics.drawString(captchaNumbers.substring(i, i+1),
+            if (i % 2 == 0) {
+                graphics.drawString(captchaNumbers.substring(i, i + 1),
                         CaptchaParameterContainer.DEFAULT_X * i,
                         CaptchaParameterContainer.UP_Y);
             } else {
-                graphics.drawString(captchaNumbers.substring(i, i+1),
+                graphics.drawString(captchaNumbers.substring(i, i + 1),
                         CaptchaParameterContainer.DEFAULT_X * i,
                         CaptchaParameterContainer.DOWN_Y);
             }

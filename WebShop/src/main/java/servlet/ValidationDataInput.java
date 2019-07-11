@@ -1,7 +1,9 @@
 package servlet;
 
 import captcha.CaptchaHandler;
+import com.mysql.cj.Session;
 import constant.Constant;
+import entity.User;
 import service.ICaptchaService;
 import service.IUserService;
 
@@ -12,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/check-login")
 public class ValidationDataInput extends HttpServlet {
@@ -21,7 +25,7 @@ public class ValidationDataInput extends HttpServlet {
     private CaptchaHandler captchaHandler;
 
     @Override
-    public void init(ServletConfig config)  {
+    public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
         userService = (IUserService) context.getAttribute(Constant.USER_SERVICE);
         captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
@@ -33,15 +37,23 @@ public class ValidationDataInput extends HttpServlet {
         String name = req.getParameter("userName");
         if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(req, captchaHandler)) {
             saveAllInformation(req);
-            req.getRequestDispatcher("registration.jsp").forward(req, resp);
+            req.getRequestDispatcher(Constant.REGISTRATION_JSP).forward(req, resp);
         } else {
-            resp.sendRedirect("index.html");
+            req.setAttribute("name", req.getParameter(Constant.NAME));
+            saveAllInformation(req);
+            createUser(req);
+            resp.sendRedirect("index.jsp");
         }
     }
 
     private void saveAllInformation(HttpServletRequest req) {
-        req.setAttribute("surname", req.getParameter("userSurname"));
-        req.setAttribute("password", req.getParameter("userPassword"));
-        req.setAttribute("email", req.getParameter("userEmail"));
+        req.setAttribute("password", req.getParameter(Constant.PASSWORD));
+        req.setAttribute("email", req.getParameter(Constant.EMAIL));
+    }
+
+    private void createUser(HttpServletRequest req){
+        User user = userService.add(req, "");
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
     }
 }
