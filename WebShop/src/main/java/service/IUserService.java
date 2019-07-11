@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface IUserService {
     boolean isUserPresent(String name);
 
-    User add(HttpServletRequest request, String avatarFilename);
+    Optional<User> add(HttpServletRequest request);
+
+    Optional<User> getUserByLoginAndPassword(String login, String password);
 }

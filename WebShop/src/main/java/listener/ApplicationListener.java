@@ -4,6 +4,7 @@ import captcha.CaptchaHandler;
 import constant.Constant;
 import container.CaptchaHandlerContainer;
 import container.UserContainer;
+import creator.ImageCreator;
 import dao.ICaptchaDao;
 import dao.IUserDao;
 import dao.impl.CaptchaDaoImpl;
@@ -20,6 +21,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 @WebListener
@@ -41,6 +43,9 @@ public class ApplicationListener implements ServletContextListener {
         setCaptchaHandler(sce);
         sce.getServletContext().setAttribute(Constant.USER_SERVICE, userService);
         sce.getServletContext().setAttribute(Constant.CAPTCHA_SERVICE, captchaService);
+        String imagePath = sce.getServletContext().getInitParameter("avatarPath");
+        ImageCreator image = new ImageCreator(Paths.get(imagePath));
+        sce.getServletContext().setAttribute("image",image);
 
     }
 

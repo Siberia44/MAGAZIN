@@ -1,6 +1,8 @@
 service\impl\UserServiceImpl.class
 container\UserContainer.class
 servlet\CaptchaController.class
+servlet\LoginController.class
+creator\ImageCreator.class
 servlet\ValidationDataInput.class
 util\IdGenerator.class
 captcha\impl\SessionCaptchaHandler.class
@@ -33,3 +35,4 @@ dao\transaction\TransactionManager.class
 container\CaptchaHandlerContainer.class
 dao\impl\CaptchaDaoImpl.class
 captcha\AbstractCaptchaHandler.class
+entity\Avatar.class

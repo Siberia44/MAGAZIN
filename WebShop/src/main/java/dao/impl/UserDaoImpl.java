@@ -1,5 +1,6 @@
 package dao.impl;
 
+import constant.Constant;
 import dao.IUserDao;
 import entity.User;
 
@@ -12,10 +13,10 @@ import java.util.Optional;
 
 public class UserDaoImpl implements IUserDao {
     private List<User> userList;
-    private static final String INSERT_NEW_USER = "insert into users values (?, ?, ?, ?)";
+    private static final String INSERT_NEW_USER = "insert into users values (?, ?, ?, ?, ?)";
     private static final String GET_USER_BY_ID = "select * from users where id=?";
     private static final String GET_USER_BY_LOGIN = "select * from users where login=?";
-    private static final String GET_USER_BY_LOGIN_AND_PASSWORD = "select * from users where login=? and password=?";
+    private static final String GET_USER_BY_LOGIN_AND_PASSWORD = "select * from users where userName=? and userPassword=?";
 
     public UserDaoImpl(List<User> userList) {
         this.userList = userList;
@@ -34,12 +35,23 @@ public class UserDaoImpl implements IUserDao {
             statement.setString(k++, user.getEmail());
             statement.setString(k++, user.getName());
             statement.setString(k++, user.getPassword());
+          //  statement.setString(k++, user.);
             statement.executeUpdate();
             System.out.println("created");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    private User getUserFromQueue(ResultSet resultSet) throws SQLException {
+        User user = new User.UserBuilder().setEmail(resultSet.getString(Constant.EMAIL))
+                .setName(resultSet.getString(Constant.NAME))
+                .setPassword(resultSet.getString(Constant.PASSWORD))
+                .build();
+     //   user.setAvatarFullname(resultSet.getString(ControllerConstant.AVATAR));
+        return user;
+    }
+
 
     @Override
     public Optional<User> getUserByLoginAndPassword(Connection connection, String login, String password) {
@@ -52,11 +64,21 @@ public class UserDaoImpl implements IUserDao {
                 return Optional.ofNullable(getUserFromQueue(resultSet));
             }
         } catch (SQLException e) {
-            log.error(INVALID_USER_LOGIN_OR_PASSWORD, e);
+            e.printStackTrace();
         } finally {
-            resultSetClose(resultSet);
+          resultSetClose(resultSet);
         }
         return Optional.empty();
     }
 
+
+    protected void resultSetClose(ResultSet resultSet){
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

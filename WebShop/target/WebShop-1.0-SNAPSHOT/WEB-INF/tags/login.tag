@@ -13,7 +13,7 @@
                    <a class="nav-link" href="registration.jsp">SignUp</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" >SignIn</a>
+                    <a class="nav-link" href="login.jsp">SignIn</a>
                 </li>
                 </ul>
             </t:when>

@@ -27,12 +27,19 @@ public class UserServiceImpl implements IUserService {
     }
 
      @Override
-    public User add(HttpServletRequest request, String avatarFilename) {
+    public Optional<User> add(HttpServletRequest request) {
         User user = new RegistrationForm().createUserByRequest(request);
         transactionManager.doInTransaction(connection -> {
             userDao.add(connection, user);
             return null;
         });
-        return user;
+        return Optional.of(user);
     }
+
+    @Override
+    public Optional<User> getUserByLoginAndPassword(String login, String password) {
+        return transactionManager.doInTransaction(connection ->
+                userDao.getUserByLoginAndPassword(connection, login, password));
+    }
+
 }

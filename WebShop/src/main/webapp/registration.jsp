@@ -62,6 +62,9 @@
                    aria-describedby="confirmPasswordHelp" placeholder="Confirm password">
         </div>
 
+        <div>
+            <input type="file" name="avatar" id="avatar">
+        </div>
         <info:captcha captchaId="${captchaId}" image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
         <input type="text" id="captcha" name="captcha" placeholder="Numbers from picture">
 

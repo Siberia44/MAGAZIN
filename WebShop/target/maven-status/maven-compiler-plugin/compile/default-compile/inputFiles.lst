@@ -8,12 +8,15 @@ C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\ca
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\dao\transaction\TransactionOperation.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\container\CaptchaParameterContainer.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\bean\RegistrationForm.java
+C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\creator\ImageCreator.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\creator\CaptchaCreator.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\dao\impl\CaptchaDaoImpl.java
+C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\entity\Avatar.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\constant\Constant.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\entity\Captcha.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\captcha\impl\CookieCaptchaHandler.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\dao\transaction\TransactionManager.java
+C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\servlet\LoginController.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\container\UserContainer.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\service\IUserService.java
 C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\java\captcha\impl\SessionCaptchaHandler.java
