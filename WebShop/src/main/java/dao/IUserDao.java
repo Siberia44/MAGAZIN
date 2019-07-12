@@ -2,13 +2,11 @@ package dao;
 
 import entity.User;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
-import java.util.List;
 import java.util.Optional;
 
 public interface IUserDao {
-    List<User> getListOfAllUsers();
+    boolean isUserExist(Connection connection, String name);
 
     void add(Connection connection, User user);
 

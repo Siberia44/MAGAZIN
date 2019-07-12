@@ -5,16 +5,16 @@
 <form action="login" method="post">
     <div class="form-group">
         <label>Name address</label>
-        <input type="name" class="form-control" name="userName" aria-describedby="nameHelp" placeholder="Enter name">
-        <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
+        <input aria-describedby="nameHelp" class="form-control" name="userName" placeholder="Enter name" type="name">
+        <small class="form-text text-muted" id="nameHelp">We'll never share your name with anyone else.</small>
     </div>
     <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" name="userPassword" placeholder="Password">
+        <input class="form-control" name="userPassword" placeholder="Password" type="password">
     </div>
     <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <input class="form-check-input" id="exampleCheck1" type="checkbox">
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </form>

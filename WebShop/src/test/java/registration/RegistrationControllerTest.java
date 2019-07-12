@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.mockito.ArgumentMatchers.any;
-
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationControllerTest {
 

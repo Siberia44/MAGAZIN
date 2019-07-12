@@ -1,31 +1,31 @@
 package servlet;
 
 import captcha.CaptchaHandler;
-import com.mysql.cj.Session;
 import constant.Constant;
 import creator.ImageCreator;
-import entity.Avatar;
 import entity.User;
 import service.ICaptchaService;
 import service.IUserService;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Optional;
 
 @WebServlet("/check-login")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class ValidationDataInput extends HttpServlet {
     private IUserService userService;
     private ICaptchaService captchaService;
     private CaptchaHandler captchaHandler;
 
     @Override
-    public void init(ServletConfig config) {
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
         ServletContext context = config.getServletContext();
         userService = (IUserService) context.getAttribute(Constant.USER_SERVICE);
         captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
@@ -52,9 +52,9 @@ public class ValidationDataInput extends HttpServlet {
         req.setAttribute("email", req.getParameter(Constant.EMAIL));
     }
 
-    private void createUser(HttpServletRequest req, Part part){
-        Optional<User> user = userService.add(req);
-        saveAvatar(user.get(), part);
+    private void createUser(HttpServletRequest req, Part part) {
+        ImageCreator imageCreator = (ImageCreator) getServletContext().getAttribute("image");
+        Optional<User> user = userService.add(req, part, imageCreator);
         HttpSession session = req.getSession();
         session.setAttribute("user", user.get());
     }
@@ -68,13 +68,4 @@ public class ValidationDataInput extends HttpServlet {
         }
         return part;
     }
-
-    private void saveAvatar(User user, Part part) {
-        if (part != null) {
-            ImageCreator imageProvider = (ImageCreator) getServletContext().getAttribute("image");
-            String fileName = imageProvider.add(part, user.getName());
-            user.setImage(fileName);
-        }
-    }
-
 }

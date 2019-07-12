@@ -12,7 +12,6 @@ public class ImageCreator {
         this.imgPath = imgPath;
     }
 
-
     public String add(Part part, String userName) {
         try {
             String fileName = userName + "." + getFileExtension(part);
@@ -28,7 +27,6 @@ public class ImageCreator {
     public File get(String fileName) {
         return new File(imgPath.toString(), fileName);
     }
-
 
     private String getFileExtension(final Part part) {
         final String partHeader = part.getHeader("content-disposition");

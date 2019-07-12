@@ -38,7 +38,7 @@
     </div>
 </nav>
 <div class="container">
-    <form id="registration-form" action="check-login" method="post">
+    <form id="registration-form" action="check-login" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="exampleInputEmail1">Enter name</label>
             <input type="name" class="form-control" name="userName" id="input-Name" aria-describedby="nameHelp"
@@ -63,7 +63,7 @@
         </div>
 
         <div>
-            <input type="file" name="avatar" id="avatar">
+            <input type="file" name="image" id="avatar" accept="image/x-png,image/gif,image/jpeg">
         </div>
         <info:captcha captchaId="${captchaId}" image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
         <input type="text" id="captcha" name="captcha" placeholder="Numbers from picture">

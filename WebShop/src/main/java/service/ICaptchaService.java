@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 
 public interface ICaptchaService {
-    // Captcha create() throws NoSuchAttributeException;
 
     CaptchaCreator create();
 

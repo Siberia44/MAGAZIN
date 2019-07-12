@@ -7,12 +7,11 @@ import java.sql.SQLException;
 
 public class TransactionManager {
 
-    private BasicDataSource dataSource;
-
     private static final String CONNECTION_WAS_NOT_CLOSED = "Connection wasn't closed";
     private static final String CHANGES_NOT_SAVED = "Changes wasn't save";
     private static final String CHANGES_NOT_BE_ROLLBACK = "Changes wasn't be rollback";
     private static final String CONNECTION_NOT_CREATED = "Connection wasn't created";
+    private BasicDataSource dataSource;
 
     public TransactionManager(BasicDataSource dataSource) {
         this.dataSource = dataSource;
@@ -21,7 +20,7 @@ public class TransactionManager {
     public <T> T doInTransaction(TransactionOperation<T> operation) {
         T result = null;
         Connection connection = null;
-        try{
+        try {
             connection = dataSource.getConnection();
             result = operation.produce(connection);
             commitChanges(connection);
@@ -32,11 +31,11 @@ public class TransactionManager {
         return result;
     }
 
-    private void closeConnection(Connection connection){
-        if (!isConnectionNull(connection)){
-            try{
+    private void closeConnection(Connection connection) {
+        if (!isConnectionNull(connection)) {
+            try {
                 connection.close();
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 System.err.println(CONNECTION_WAS_NOT_CLOSED);
             }
         }
@@ -62,7 +61,7 @@ public class TransactionManager {
         }
     }
 
-    private boolean isConnectionNull(Connection connection){
+    private boolean isConnectionNull(Connection connection) {
         if (connection == null) {
             System.err.println(CONNECTION_NOT_CREATED);
             return true;

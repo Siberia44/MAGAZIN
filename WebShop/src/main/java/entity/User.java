@@ -17,6 +17,10 @@ public class User {
         this.image = builder.image;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     public void setImage(String image) {
         this.image = image;
     }
@@ -48,7 +52,7 @@ public class User {
             return this;
         }
 
-        public UserBuilder setImage(String name) {
+        public UserBuilder setImage(String image) {
             this.image = image;
             return this;
         }

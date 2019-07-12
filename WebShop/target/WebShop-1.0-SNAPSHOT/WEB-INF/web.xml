@@ -7,7 +7,7 @@
 
     <context-param>
         <param-name>avatarPath</param-name>
-        <param-value>C:\Users\Dmytro_Taranov\Desktop\image\</param-value>
+        <param-value>C:\Users\Dmytro_Taranov\Desktop\Pre_Prod_java_q3q4_2017\WebShop\src\main\webapp\img</param-value>
     </context-param>
 
     <context-param>

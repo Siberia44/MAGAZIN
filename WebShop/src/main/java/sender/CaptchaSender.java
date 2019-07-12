@@ -1,7 +1,6 @@
 package sender;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class CaptchaSender {
     private HttpServletRequest request;

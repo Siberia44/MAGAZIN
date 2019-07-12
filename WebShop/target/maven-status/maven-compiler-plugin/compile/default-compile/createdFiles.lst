@@ -27,6 +27,7 @@ creator\CaptchaCreator.class
 listener\ApplicationListener.class
 captcha\impl\CookieCaptchaHandler.class
 entity\User.class
+servlet\ImageServlet.class
 entity\Captcha.class
 exception\SessionTimeOutException.class
 servlet\LogoutController.class
@@ -35,4 +36,3 @@ dao\transaction\TransactionManager.class
 container\CaptchaHandlerContainer.class
 dao\impl\CaptchaDaoImpl.class
 captcha\AbstractCaptchaHandler.class
-entity\Avatar.class

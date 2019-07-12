@@ -14,6 +14,7 @@ public class Constant {
     public static final String NAME = "userName";
     public static final String PASSWORD = "userPassword";
     public static final String EMAIL = "userEmail";
+    public static final String AVATAR = "image";
 
     public static final boolean DEFAULT_AUTO_COMMIT = false;
     public static final boolean ROLLBACK_ON_RETURN = true;
@@ -25,4 +26,5 @@ public class Constant {
     public static final String MAX_SIZE = "db.pool.maxSize";
 
     public static final String CONNECTION_POOL_PROPERSTIES_FILE = "database.properties";
+    public static final String DEFAULT_IMAGE = "im1.jpg";
 }

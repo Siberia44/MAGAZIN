@@ -3,7 +3,6 @@ package listener;
 import captcha.CaptchaHandler;
 import constant.Constant;
 import container.CaptchaHandlerContainer;
-import container.UserContainer;
 import creator.ImageCreator;
 import dao.ICaptchaDao;
 import dao.IUserDao;
@@ -26,12 +25,11 @@ import java.util.Properties;
 
 @WebListener
 public class ApplicationListener implements ServletContextListener {
-    private UserContainer container = new UserContainer();
+    TransactionManager transactionManager;
     private IUserDao userDao;
     private ICaptchaDao captchaDao;
     private ICaptchaService captchaService;
     private IUserService userService;
-    TransactionManager transactionManager;
     private BasicDataSource dataSource = new BasicDataSource();
 
     @Override
@@ -45,7 +43,7 @@ public class ApplicationListener implements ServletContextListener {
         sce.getServletContext().setAttribute(Constant.CAPTCHA_SERVICE, captchaService);
         String imagePath = sce.getServletContext().getInitParameter("avatarPath");
         ImageCreator image = new ImageCreator(Paths.get(imagePath));
-        sce.getServletContext().setAttribute("image",image);
+        sce.getServletContext().setAttribute("image", image);
 
     }
 
@@ -77,7 +75,7 @@ public class ApplicationListener implements ServletContextListener {
     }
 
     private void createDao() {
-        userDao = new UserDaoImpl(container.getUsersList());
+        userDao = new UserDaoImpl();
         captchaDao = new CaptchaDaoImpl();
     }
 

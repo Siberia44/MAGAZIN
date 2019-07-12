@@ -1,13 +1,14 @@
 package service.impl;
 
 import bean.RegistrationForm;
+import creator.ImageCreator;
 import dao.IUserDao;
 import dao.transaction.TransactionManager;
 import entity.User;
 import service.IUserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import javax.servlet.http.Part;
 import java.util.Optional;
 
 public class UserServiceImpl implements IUserService {
@@ -21,14 +22,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean isUserPresent(String name) {
-        List<User> userList = userDao.getListOfAllUsers();
-        Optional<User> optionalUser = userList.stream().filter(nameInList -> nameInList.getName().equals(name)).findFirst();
-        return optionalUser.isPresent();
+        return transactionManager.doInTransaction(connection ->
+                userDao.isUserExist(connection, name));
     }
 
-     @Override
-    public Optional<User> add(HttpServletRequest request) {
-        User user = new RegistrationForm().createUserByRequest(request);
+    @Override
+    public Optional<User> add(HttpServletRequest request, Part part, ImageCreator imageCreator) {
+        User user = new RegistrationForm().createUserByRequest(request, part, imageCreator);
         transactionManager.doInTransaction(connection -> {
             userDao.add(connection, user);
             return null;
@@ -41,5 +41,4 @@ public class UserServiceImpl implements IUserService {
         return transactionManager.doInTransaction(connection ->
                 userDao.getUserByLoginAndPassword(connection, login, password));
     }
-
 }
