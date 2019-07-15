@@ -1,7 +1,0 @@
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:27:44 +0300] "GET / HTTP/1.1" 200 6996 http-bio-8080-exec-1 507
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:27:44 +0300] "GET /css/icon.css HTTP/1.1" 304 - http-bio-8080-exec-3 4
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:27:44 +0300] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-4 4
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:27:46 +0300] "GET /login.jsp HTTP/1.1" 200 814 http-bio-8080-exec-5 40
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:28:17 +0300] "POST /login HTTP/1.1" 302 - http-bio-8080-exec-6 359
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:28:17 +0300] "GET /index.jsp HTTP/1.1" 200 7222 http-bio-8080-exec-8 5
-0:0:0:0:0:0:0:1 - - [12/Jul/2019:16:28:17 +0300] "GET /img?image=wqewqedw.filename= HTTP/1.1" 200 - http-bio-8080-exec-9 2

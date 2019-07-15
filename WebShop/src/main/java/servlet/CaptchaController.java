@@ -23,12 +23,14 @@ import java.io.OutputStream;
 public class CaptchaController extends HttpServlet {
     private ICaptchaService captchaService;
     private CaptchaHandler captchaHandler;
+    private long captchaLiveTime;
 
     @Override
     public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
         captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
         captchaHandler = (CaptchaHandler) context.getAttribute(Constant.CAPTCHA_PRESERVER);
+        captchaLiveTime = Long.parseLong((String) context.getAttribute(Constant.CAPTCHA_LIVE_TIME));
     }
 
     @Override
@@ -45,7 +47,7 @@ public class CaptchaController extends HttpServlet {
             OutputStream osImage = response.getOutputStream();
             ImageIO.write(bufferedImage, "jpeg", osImage);
             request.setAttribute("captcha", bufferedImage);
-            Captcha captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers());
+            Captcha captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers(), captchaLiveTime);
             captchaHandler.addCaptcha(request, response, captcha);
             sender.setCaptchaId(captcha.getId());
         } catch (NoSuchAttributeException | IOException e) {

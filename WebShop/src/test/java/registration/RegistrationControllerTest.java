@@ -1,7 +1,8 @@
 package registration;
 
 import captcha.CaptchaHandler;
-import entity.User;
+import dto.CaptchaDTO;
+import entity.Captcha;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,13 +12,15 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import service.ICaptchaService;
 import service.IUserService;
-import servlet.ValidationDataInput;
+import servlet.RegistrationServlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RegistrationControllerTest {
@@ -44,10 +47,13 @@ public class RegistrationControllerTest {
     private RequestDispatcher dispatcher;
 
     @Mock
-    private User user;
+    private CaptchaDTO captchaDTO;
+
+    @Mock
+    private Captcha captcha;
 
     @InjectMocks
-    private ValidationDataInput controller;
+    private RegistrationServlet controller;
 
     @Before
     public void setUp() {
@@ -62,12 +68,11 @@ public class RegistrationControllerTest {
         Mockito.verify(dispatcher, Mockito.times(ONE_TIME)).forward(request, response);
     }
 
-//    @Test
-//    public void sendUserToMainShopPageWhenSuccessfulLogin() throws ServletException, IOException {
-//        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(false);
-//        Mockito.when(userService.add(any(), any())).thenReturn(user);
-//        Mockito.when(captchaService.checkCaptchaOnValid(request, captchaHandler)).thenReturn(true);
-//        controller.doPost(request, response);
-//        Mockito.verify(response, Mockito.times(ONE_TIME)).sendRedirect(any());
-//    }
+    @Test
+    public void sendUserToMainShopPageWhenSuccessfulLogin() throws ServletException, IOException {
+        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(false);
+        Mockito.when(captchaService.checkCaptchaOnValid(any(), any())).thenReturn(true);
+        controller.doPost(request, response);
+        Mockito.verify(response, Mockito.times(ONE_TIME)).sendRedirect(any());
+    }
 }

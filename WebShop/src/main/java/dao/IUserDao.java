@@ -2,13 +2,12 @@ package dao;
 
 import entity.User;
 
-import java.sql.Connection;
-import java.util.Optional;
+import java.util.List;
 
 public interface IUserDao {
-    boolean isUserExist(Connection connection, String name);
 
-    void add(Connection connection, User user);
-
-    Optional<User> getUserByLoginAndPassword(Connection connection, String login, String password);
+    /**
+     * @return a list of users
+     */
+    List<User> getListOfAllUsers();
 }

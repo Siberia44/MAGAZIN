@@ -1,6 +1,5 @@
 package entity;
 
-import container.CaptchaParameterContainer;
 import util.IdGenerator;
 
 import java.util.Objects;
@@ -9,15 +8,21 @@ public class Captcha {
     private final int id;
     private final String numbers;
     private final long expirationTime;
+    private final long captchaLiveTime;
 
     private Captcha(CaptchaBuilder builder) {
         id = IdGenerator.getIdCaptcha();
         numbers = builder.numbers;
         expirationTime = builder.expirationTime;
+        captchaLiveTime = builder.captchaLiveTime;
     }
 
     public int getId() {
         return id;
+    }
+
+    public long getCaptchaLiveTime() {
+        return captchaLiveTime;
     }
 
     public String getNumbers() {
@@ -26,7 +31,7 @@ public class Captcha {
 
     public boolean isValid() {
         return System.currentTimeMillis() - expirationTime <=
-                CaptchaParameterContainer.CAPTCHA_LIVE_TIME;
+                getCaptchaLiveTime();
     }
 
     @Override
@@ -52,6 +57,7 @@ public class Captcha {
 
         private String numbers;
         private long expirationTime;
+        private long captchaLiveTime;
 
         public CaptchaBuilder setNumbers(String numbers) {
             this.numbers = numbers;
@@ -60,6 +66,11 @@ public class Captcha {
 
         public CaptchaBuilder setExpirationTime(long expirationTime) {
             this.expirationTime = expirationTime;
+            return this;
+        }
+
+        public CaptchaBuilder setCaptchaLiveTime(long captchaLiveTime) {
+            this.captchaLiveTime = captchaLiveTime;
             return this;
         }
 

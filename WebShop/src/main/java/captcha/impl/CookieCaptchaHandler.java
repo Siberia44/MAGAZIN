@@ -21,9 +21,12 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        captches.put(captcha.getId(), captcha);
-        response.addCookie(new Cookie(CaptchaParameterContainer.CAPTCHA +
-                captcha.getId(), "" + captcha.getId()));
+        int captchaID = captcha.getId();
+        captches.put(captchaID, captcha);
+        Cookie cookie = new Cookie(CaptchaParameterContainer.CAPTCHA +
+                captchaID, "" + captchaID);
+        firstCookie(cookie);
+        response.addCookie(cookie);
     }
 
     @Override
