@@ -1,5 +1,0 @@
-0:0:0:0:0:0:0:1 - - [11/Jul/2019:19:43:48 +0300] "GET / HTTP/1.1" 200 6727 http-bio-8080-exec-1 3469
-0:0:0:0:0:0:0:1 - - [11/Jul/2019:19:43:54 +0300] "GET /registration.jsp HTTP/1.1" 200 3953 http-bio-8080-exec-2 426
-0:0:0:0:0:0:0:1 - - [11/Jul/2019:19:43:54 +0300] "GET /js/commonFunction.js HTTP/1.1" 200 766 http-bio-8080-exec-4 3
-0:0:0:0:0:0:0:1 - - [11/Jul/2019:19:43:54 +0300] "GET /js/validation.js HTTP/1.1" 200 3035 http-bio-8080-exec-5 4
-0:0:0:0:0:0:0:1 - - [11/Jul/2019:19:44:01 +0300] "GET /captcha HTTP/1.1" 200 3431 http-bio-8080-exec-3 7015

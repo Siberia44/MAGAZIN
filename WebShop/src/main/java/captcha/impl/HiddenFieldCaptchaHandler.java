@@ -10,20 +10,21 @@ import java.util.Map;
 
 public class HiddenFieldCaptchaHandler extends AbstractCaptchaHandler {
 
-    public HiddenFieldCaptchaHandler(Map<Integer, Captcha> captches) {
+    public HiddenFieldCaptchaHandler(Map<String, Captcha> captches) {
         super(captches);
     }
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        captches.put(captcha.getId(), captcha);
-        request.setAttribute(CAPTCHA_ID, captcha.getId());
+        String captchaID = String.valueOf(captcha.getId());
+        captches.put(captchaID, captcha);
+        request.setAttribute(CAPTCHA_ID, captchaID);
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException {
-        String captchaId = request.getParameter(HIDDEN_CAPTCHA);
-        Captcha captcha = captches.get(Integer.parseInt(captchaId));
+        System.out.println(request.getParameter(HIDDEN_CAPTCHA));
+        Captcha captcha = captches.get(request.getParameter(HIDDEN_CAPTCHA));
         if (captcha.isValid()) {
             return captcha;
         }

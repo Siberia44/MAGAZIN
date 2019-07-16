@@ -9,9 +9,9 @@ public abstract class AbstractCaptchaHandler implements CaptchaHandler {
     protected static final String CAPTCHA_ID = "captchaId";
     protected static final String HIDDEN_CAPTCHA = "hiddenCaptcha";
 
-    protected Map<Integer, Captcha> captches;
+    protected Map<String, Captcha> captches;
 
-    protected AbstractCaptchaHandler(Map<Integer, Captcha> captches) {
+    protected AbstractCaptchaHandler(Map<String, Captcha> captches) {
         this.captches = captches;
     }
 }

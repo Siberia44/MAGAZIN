@@ -10,15 +10,15 @@ import java.util.Map;
 
 public class SessionCaptchaHandler extends AbstractCaptchaHandler {
 
-    public SessionCaptchaHandler(Map<Integer, Captcha> captches) {
+    public SessionCaptchaHandler(Map<String, Captcha> captches) {
         super(captches);
     }
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        int captchaID = captcha.getId();
+        String captchaID = String.valueOf(captcha.getId());
         captches.put(captchaID, captcha);
-        request.getSession().setAttribute(CAPTCHA_ID, captchaID);
+        request.setAttribute(CAPTCHA_ID, captchaID);
     }
 
     @Override

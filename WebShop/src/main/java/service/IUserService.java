@@ -1,14 +1,11 @@
 package service;
 
-import entity.User;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
-
 public interface IUserService {
+    /**
+     * checks user by name
+     *
+     * @param name
+     * @return true if user exist
+     */
     boolean isUserPresent(String name);
-
-    Optional<User> add(HttpServletRequest request);
-
-    Optional<User> getUserByLoginAndPassword(String login, String password);
 }

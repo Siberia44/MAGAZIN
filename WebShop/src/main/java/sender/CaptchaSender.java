@@ -36,9 +36,10 @@ public class CaptchaSender {
     }
 
     public void send() {
-        request.getSession().setAttribute("sessionCaptchaId", captchaId);
+        request.setAttribute("sessionCaptchaId", captchaId);
         request.setAttribute("requestCaptchaId", captchaId);
         request.setAttribute("isCaptcha", isCaptcha);
-        request.getSession().setAttribute("hiddenCaptcha", captchaId);
+        request.setAttribute("hiddenCaptcha", captchaId);
+        //request.getSession().setAttribute("captchaId", captchaId);
     }
 }

@@ -6,14 +6,14 @@
          version="4.0">
 
     <context-param>
-        <param-name>avatarPath</param-name>
-        <param-value>C:\Users\Dmytro_Taranov\Desktop\image\</param-value>
+        <param-name>captchaHandler</param-name>
+        <param-value>hiddenFieldCaptchaHandler</param-value>
+        <!--<param-value>cookieCaptchaHandler</param-value>-->
+        <!--<param-value>sessionCaptchaHandler</param-value>-->
     </context-param>
 
     <context-param>
-        <param-name>captchaHandler</param-name>
-        <!--<param-value>hiddenFieldCaptchaHandler</param-value>-->
-        <!--<param-value>cookieCaptchaHandler</param-value>-->
-        <param-value>sessionCaptchaHandler</param-value>
+        <param-name>captchaExpiration</param-name>
+        <param-value>30000000000000000</param-value>
     </context-param>
 </web-app>

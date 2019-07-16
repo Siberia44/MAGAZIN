@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class CaptchaHandlerContainer {
 
-    private final Map<Integer, Captcha> captches = new LinkedHashMap<>();
+    private final Map<String, Captcha> captches = new LinkedHashMap<>();
     private Map<String, CaptchaHandler> handlers = new HashMap<>();
 
     public CaptchaHandlerContainer() {

@@ -28,9 +28,11 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
             </li>
+            <form action="/captcha" method="get">
             <li class="nav-item">
                 <a class="nav-link" href="registration.jsp">Registration</a>
             </li>
+            </form>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
@@ -61,15 +63,11 @@
                    id="inputConfirmPassword"
                    aria-describedby="confirmPasswordHelp" placeholder="Confirm password">
         </div>
-
-        <div>
-            <input type="file" name="avatar" id="avatar">
-        </div>
-        <info:captcha captchaId="${captchaId}" image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
+        <info:captcha image="${pageContext.request.contextPath}/registerCaptcha.jpeg"/>
         <input type="text" id="captcha" name="captcha" placeholder="Numbers from picture">
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
 
 </div>
 

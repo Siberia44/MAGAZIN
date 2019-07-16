@@ -4,6 +4,7 @@ import captcha.CaptchaHandler;
 import constant.Constant;
 import creator.CaptchaCreator;
 import entity.Captcha;
+import exception.SessionTimeOutException;
 import sender.CaptchaSender;
 import service.ICaptchaService;
 
@@ -13,9 +14,7 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,35 +22,30 @@ import java.io.OutputStream;
 @WebServlet("/captcha")
 public class CaptchaController extends HttpServlet {
     private ICaptchaService captchaService;
-    private CaptchaHandler captchaHandler;
 
     @Override
     public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
         captchaService = (ICaptchaService) context.getAttribute(Constant.CAPTCHA_SERVICE);
-        captchaHandler = (CaptchaHandler) context.getAttribute(Constant.CAPTCHA_PRESERVER);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         captchaService.removeOldCaptcha();
         getSenderWithNewCaptcha(req, resp).send();
     }
 
     private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        CaptchaSender sender = new CaptchaSender(request);
         try {
-            CaptchaCreator captchaCreator = captchaService.create();
+            HttpSession session = request.getSession();
+            CaptchaCreator captchaCreator = (CaptchaCreator) session.getAttribute("captchaCreator");
             BufferedImage bufferedImage = captchaService.bufferedImage(captchaCreator);
             OutputStream osImage = response.getOutputStream();
             ImageIO.write(bufferedImage, "jpeg", osImage);
-            request.setAttribute("captcha", bufferedImage);
-            Captcha captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers());
-            captchaHandler.addCaptcha(request, response, captcha);
-            sender.setCaptchaId(captcha.getId());
         } catch (NoSuchAttributeException | IOException e) {
             e.printStackTrace();
         }
-        return sender;
+        return null;
     }
+
 }

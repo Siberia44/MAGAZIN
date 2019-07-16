@@ -15,15 +15,17 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
     private int oldestCookieId = 0;
     private Cookie oldestCookie;
 
-    public CookieCaptchaHandler(Map<Integer, Captcha> captches) {
+    public CookieCaptchaHandler(Map<String, Captcha> captches) {
         super(captches);
     }
 
     @Override
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
-        captches.put(captcha.getId(), captcha);
-        response.addCookie(new Cookie(CaptchaParameterContainer.CAPTCHA +
-                captcha.getId(), "" + captcha.getId()));
+        String captchaID = String.valueOf(captcha.getId());
+        captches.put(captchaID, captcha);
+        Cookie cookie = new Cookie(CaptchaParameterContainer.CAPTCHA +
+                captchaID, "" + captchaID);
+        response.addCookie(cookie);
     }
 
     @Override

@@ -1,15 +1,12 @@
 package service.impl;
 
-import captcha.CaptchaHandler;
-import constant.Constant;
 import creator.CaptchaCreator;
 import dao.ICaptchaDao;
+import dto.CaptchaDTO;
 import entity.Captcha;
-import exception.SessionTimeOutException;
 import service.ICaptchaService;
 
 import javax.naming.directory.NoSuchAttributeException;
-import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CaptchaServiceImpl implements ICaptchaService {
-    private ICaptchaDao captchaDao;
+    ICaptchaDao captchaDao;
 
     public CaptchaServiceImpl(ICaptchaDao captchaDao) {
         this.captchaDao = captchaDao;
@@ -49,19 +46,16 @@ public class CaptchaServiceImpl implements ICaptchaService {
     }
 
     @Override
-    public boolean checkCaptchaOnValid(HttpServletRequest request, CaptchaHandler handler) {
-        try {
-            Captcha captcha = handler.getCaptcha(request);
-            return captcha.getNumbers().equals(request.getParameter(Constant.CAPTCHA));
-        } catch (SessionTimeOutException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean checkCaptchaOnValid(CaptchaDTO captchaDTO, Captcha captcha) {
+        return captcha.getNumbers().equals(captchaDTO.getCaptchaNumbers());
     }
 
     @Override
-    public Captcha createCaptcha(String captchaNumbers) {
+    public Captcha createCaptcha(String captchaNumbers, long captchaLiveTIme) {
         return new Captcha.CaptchaBuilder().setExpirationTime(new Date().getTime())
-                .setNumbers(captchaNumbers).build();
+                .setNumbers(captchaNumbers)
+                .setCaptchaLiveTime(captchaLiveTIme)
+                .build();
     }
+
 }
