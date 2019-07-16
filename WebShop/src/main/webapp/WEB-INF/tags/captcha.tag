@@ -5,9 +5,12 @@
 <%@ attribute name="captchaId" required="false" %>
 <%@ attribute name="image" required="true" %>
 
+
 <div>
-    <c:if test="${initParam.captchaHandler == 'hiddenFieldCaptchaHandler'}">
-        <input type="hidden" name="CaptchaId" value="${CaptchaId}" >
-    </c:if>
-    <img src="captcha">
+   <img src="captcha">
+   <c:choose>
+    <c:when test="${initParam.captchaHandler == 'hiddenFieldCaptchaHandler'}">
+        <input type="hidden" name="hiddenCaptcha" value="${captchaId}">
+    </c:when>
+</c:choose>
 </div>

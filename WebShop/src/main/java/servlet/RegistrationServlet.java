@@ -22,6 +22,7 @@ public class RegistrationServlet extends HttpServlet {
     private IUserService userService;
     private ICaptchaService captchaService;
     private CaptchaHandler captchaHandler;
+    private Captcha captcha;
 
     @Override
     public void init(ServletConfig config) {
@@ -32,20 +33,26 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("userName");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            Captcha captcha = captchaHandler.getCaptcha(req);
-            CaptchaDTO captchaDTO = new CaptchaDTO();
-            captchaDTO.setCaptchaNumbers(req.getParameter(Constant.CAPTCHA));
-            if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(captchaDTO, captcha)) {
-                saveAllInformation(req);
-                req.getRequestDispatcher("registration.jsp").forward(req, resp);
-            } else {
-                resp.sendRedirect("index.html");
-            }
+            req.getSession().setAttribute("captchaId", captcha.getId());
+            captcha = captchaHandler.getCaptcha(req);
+            doPost(req, resp);
         } catch (SessionTimeOutException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("userName");
+        CaptchaDTO captchaDTO = new CaptchaDTO();
+        captchaDTO.setCaptchaNumbers(req.getParameter(Constant.CAPTCHA));
+        if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(captchaDTO, captcha)) {
+            saveAllInformation(req);
+            req.getRequestDispatcher("registration.jsp").forward(req, resp);
+        } else {
+            resp.sendRedirect("index.html");
         }
     }
 

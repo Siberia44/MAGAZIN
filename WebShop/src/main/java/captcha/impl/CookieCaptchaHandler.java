@@ -25,7 +25,6 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
         captches.put(captchaID, captcha);
         Cookie cookie = new Cookie(CaptchaParameterContainer.CAPTCHA +
                 captchaID, "" + captchaID);
-        firstCookie(cookie);
         response.addCookie(cookie);
     }
 

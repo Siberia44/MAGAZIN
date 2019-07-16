@@ -7,8 +7,8 @@
 
     <context-param>
         <param-name>captchaHandler</param-name>
-        <!--<param-value>hiddenFieldCaptchaHandler</param-value>-->
-        <param-value>cookieCaptchaHandler</param-value>
+        <param-value>hiddenFieldCaptchaHandler</param-value>
+        <!--<param-value>cookieCaptchaHandler</param-value>-->
         <!--<param-value>sessionCaptchaHandler</param-value>-->
     </context-param>
 

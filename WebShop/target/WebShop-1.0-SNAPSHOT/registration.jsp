@@ -38,7 +38,7 @@
     </div>
 </nav>
 <div class="container">
-    <form id="registration-form" action="check-login" method="post">
+    <form id="registration-form" action="check-login" method="get">
         <div class="form-group">
             <label for="exampleInputEmail1">Enter name</label>
             <input type="name" class="form-control" name="userName" id="input-Name" aria-describedby="nameHelp"

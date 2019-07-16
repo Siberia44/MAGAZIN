@@ -4,6 +4,7 @@ import captcha.CaptchaHandler;
 import constant.Constant;
 import creator.CaptchaCreator;
 import entity.Captcha;
+import exception.SessionTimeOutException;
 import sender.CaptchaSender;
 import service.ICaptchaService;
 
@@ -11,7 +12,9 @@ import javax.imageio.ImageIO;
 import javax.naming.directory.NoSuchAttributeException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +27,8 @@ public class CaptchaController extends HttpServlet {
     private ICaptchaService captchaService;
     private CaptchaHandler captchaHandler;
     private long captchaLiveTime;
+    private Captcha captcha;
+
 
     @Override
     public void init(ServletConfig config) {
@@ -34,9 +39,9 @@ public class CaptchaController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        captchaService.removeOldCaptcha();
-        getSenderWithNewCaptcha(req, resp).send();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            captchaService.removeOldCaptcha();
+            getSenderWithNewCaptcha(req, resp).send();
     }
 
     private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
@@ -45,11 +50,11 @@ public class CaptchaController extends HttpServlet {
             CaptchaCreator captchaCreator = captchaService.create();
             BufferedImage bufferedImage = captchaService.bufferedImage(captchaCreator);
             OutputStream osImage = response.getOutputStream();
+            captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers(), captchaLiveTime);
+            sender.setCaptchaId(captcha.getId());
+            captchaHandler.addCaptcha(request, response, captcha);
             ImageIO.write(bufferedImage, "jpeg", osImage);
             request.setAttribute("captcha", bufferedImage);
-            Captcha captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers(), captchaLiveTime);
-            captchaHandler.addCaptcha(request, response, captcha);
-            sender.setCaptchaId(captcha.getId());
         } catch (NoSuchAttributeException | IOException e) {
             e.printStackTrace();
         }
