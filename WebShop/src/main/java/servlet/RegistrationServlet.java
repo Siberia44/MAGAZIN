@@ -42,6 +42,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         CaptchaSender sender = new CaptchaSender(req);
         captchaCreator = captchaService.create();
+        captchaCreator.createCaptchaNumbers();
         captcha = captchaService.createCaptcha(captchaCreator.getCaptchaNumbers(), captchaLiveTime);
         sender.setCaptchaId(captcha.getId());
         captchaHandler.addCaptcha(req, resp, captcha);
@@ -54,17 +55,17 @@ public class RegistrationServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             captcha = captchaHandler.getCaptcha(req);
+            String name = req.getParameter("userName");
+            CaptchaDTO captchaDTO = new CaptchaDTO();
+            captchaDTO.setCaptchaNumbers(req.getParameter(Constant.CAPTCHA));
+            if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(captchaDTO, captcha)) {
+                saveAllInformation(req);
+                req.getRequestDispatcher("registration.jsp").forward(req, resp);
+            } else {
+                resp.sendRedirect("index.html");
+            }
         } catch (SessionTimeOutException e) {
             e.printStackTrace();
-        }
-        String name = req.getParameter("userName");
-        CaptchaDTO captchaDTO = new CaptchaDTO();
-        captchaDTO.setCaptchaNumbers(req.getParameter(Constant.CAPTCHA));
-        if (userService.isUserPresent(name) || !captchaService.checkCaptchaOnValid(captchaDTO, captcha)) {
-            saveAllInformation(req);
-            req.getRequestDispatcher("registration.jsp").forward(req, resp);
-        } else {
-            resp.sendRedirect("index.html");
         }
     }
 

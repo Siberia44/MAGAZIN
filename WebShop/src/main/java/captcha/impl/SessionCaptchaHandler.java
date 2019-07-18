@@ -6,6 +6,7 @@ import exception.SessionTimeOutException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 public class SessionCaptchaHandler extends AbstractCaptchaHandler {
@@ -18,12 +19,14 @@ public class SessionCaptchaHandler extends AbstractCaptchaHandler {
     public void addCaptcha(HttpServletRequest request, HttpServletResponse response, Captcha captcha) {
         String captchaID = String.valueOf(captcha.getId());
         captches.put(captchaID, captcha);
-        request.setAttribute(CAPTCHA_ID, captchaID);
+        HttpSession session = request.getSession();
+        session.setAttribute(CAPTCHA_ID, captchaID);
     }
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException {
-        int captchaId = (int) request.getSession().getAttribute(CAPTCHA_ID);
+        HttpSession session = request.getSession();
+        String captchaId = (String) session.getAttribute(CAPTCHA_ID);
         Captcha captcha = captches.get(captchaId);
         if (captcha.isValid()) {
             return captcha;

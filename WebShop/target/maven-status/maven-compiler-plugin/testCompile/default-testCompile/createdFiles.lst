@@ -1,0 +1,5 @@
+handler\HiddenFieldCaptchaHandlerTest.class
+registration\RegistrationControllerTest.class
+captcha\DefaultCaptchaServiceTest.class
+handler\CookieCaptchaHandlerTest.class
+handler\SessionCaptchaHandlerTest.class

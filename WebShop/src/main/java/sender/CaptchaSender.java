@@ -1,7 +1,6 @@
 package sender;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class CaptchaSender {
     private HttpServletRequest request;
@@ -40,6 +39,5 @@ public class CaptchaSender {
         request.setAttribute("requestCaptchaId", captchaId);
         request.setAttribute("isCaptcha", isCaptcha);
         request.setAttribute("hiddenCaptcha", captchaId);
-        //request.getSession().setAttribute("captchaId", captchaId);
     }
 }

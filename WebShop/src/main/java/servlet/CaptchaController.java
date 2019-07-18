@@ -1,10 +1,7 @@
 package servlet;
 
-import captcha.CaptchaHandler;
 import constant.Constant;
 import creator.CaptchaCreator;
-import entity.Captcha;
-import exception.SessionTimeOutException;
 import sender.CaptchaSender;
 import service.ICaptchaService;
 
@@ -14,7 +11,10 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -32,20 +32,20 @@ public class CaptchaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         captchaService.removeOldCaptcha();
-        getSenderWithNewCaptcha(req, resp).send();
+        getSenderWithNewCaptcha(req, resp);
     }
 
-    private CaptchaSender getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
+    private void getSenderWithNewCaptcha(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();
             CaptchaCreator captchaCreator = (CaptchaCreator) session.getAttribute("captchaCreator");
             BufferedImage bufferedImage = captchaService.bufferedImage(captchaCreator);
             OutputStream osImage = response.getOutputStream();
+            new CaptchaSender(request).send();
             ImageIO.write(bufferedImage, "jpeg", osImage);
         } catch (NoSuchAttributeException | IOException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
 }

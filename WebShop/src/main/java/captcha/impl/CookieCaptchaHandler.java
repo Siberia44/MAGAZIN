@@ -30,7 +30,7 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
 
     @Override
     public Captcha getCaptcha(HttpServletRequest request) throws SessionTimeOutException {
-        int cookieId = getOldestCaptchaIdByCookie(request);
+        String cookieId = getOldestCaptchaIdByCookie(request);
         Captcha captcha = captches.get(cookieId);
         if (captcha.isValid()) {
             return captcha;
@@ -38,13 +38,13 @@ public class CookieCaptchaHandler extends AbstractCaptchaHandler {
         throw new SessionTimeOutException();
     }
 
-    private int getOldestCaptchaIdByCookie(HttpServletRequest request) {
+    private String getOldestCaptchaIdByCookie(HttpServletRequest request) {
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().startsWith(CaptchaParameterContainer.CAPTCHA)) {
                 findValidCookie(cookie);
             }
         }
-        return Integer.parseInt(oldestCookie.getValue());
+        return String.valueOf(oldestCookie.getValue());
     }
 
     private void findValidCookie(Cookie cookie) {

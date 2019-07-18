@@ -17,12 +17,11 @@ public class CaptchaCreator {
     private int symbolCount;
 
     public BufferedImage createImage() throws NoSuchAttributeException {
-        createCaptchaNumbers();
         BufferedImage image = createCaptchaBackground();
         return getCaptchaWithNumbers(image);
     }
 
-    private void createCaptchaNumbers() {
+    public void createCaptchaNumbers() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < symbolCount; i++) {
             builder.append(random.nextInt(9));

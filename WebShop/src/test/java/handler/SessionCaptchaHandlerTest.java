@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 @RunWith(MockitoJUnitRunner.class)
 public class SessionCaptchaHandlerTest {
 
-    private static final int CAPTCHA_ID = 5;
+    private static final String CAPTCHA_ID = "5";
 
     @Mock
     private HttpSession session;

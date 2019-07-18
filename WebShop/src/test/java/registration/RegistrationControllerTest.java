@@ -57,24 +57,22 @@ public class RegistrationControllerTest {
 
     @Before
     public void setUp() {
-//        Mockito.when(request.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
-//        Mockito.when(request.getParameter(Mockito.anyString())).thenReturn(LOGIN);
+        Mockito.when(request.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
+        Mockito.when(request.getParameter(Mockito.anyString())).thenReturn(LOGIN);
     }
 
     @Test
     public void sendUserToRegistrationPageWhenInputLoginIsExistInDB() throws ServletException, IOException {
-//        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(true);
-//        controller.doPost(request, response);
-//        Mockito.verify(dispatcher, Mockito.times(ONE_TIME)).forward(request, response);
-//    }
+        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(true);
+        controller.doPost(request, response);
+        Mockito.verify(dispatcher, Mockito.times(ONE_TIME)).forward(request, response);
+    }
 
-//    @Test
-//    public void sendUserToMainShopPageWhenSuccessfulLogin() throws ServletException, IOException {
-//        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(false);
-//        Mockito.when(captchaService.checkCaptchaOnValid(any(), any())).thenReturn(true);
-//        controller.doPost(request, response);
-//        Mockito.verify(response, Mockito.times(ONE_TIME)).sendRedirect(any());
-//    }
-//}
+    @Test
+    public void sendUserToMainShopPageWhenSuccessfulLogin() throws ServletException, IOException {
+        Mockito.when(userService.isUserPresent(LOGIN)).thenReturn(false);
+        Mockito.when(captchaService.checkCaptchaOnValid(any(), any())).thenReturn(true);
+        controller.doPost(request, response);
+        Mockito.verify(response, Mockito.times(ONE_TIME)).sendRedirect(any());
     }
 }
